@@ -188,9 +188,24 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-05 16:59:11 / Modified: 17:04:02" itemprop="dateCreated datePublished" datetime="2020-04-05T16:59:11+08:00">2020-04-05</time>
+              <time title="Created: 2020-04-05 16:59:11" itemprop="dateCreated datePublished" datetime="2020-04-05T16:59:11+08:00">2020-04-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-06 01:43:11" itemprop="dateModified" datetime="2020-04-06T01:43:11+08:00">2020-04-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a>
+                </span>
             </span>
 
           
@@ -247,7 +262,7 @@
 <p>看起来很复杂，但是实际上，它就保存了最重要的几个数据：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Modification：每个组件的修改数据列表，但凡修改的数据，都会在这里体现。</span><br><span class="line">ParentPrefab：表示是哪一个Prefab。</span><br></pre></td></tr></table></figure>
 <p>所以上面的数据就是GUID为27f1445c35c923741a22e4948c4da980的Prefab，修改后的FileID为4126423848245890的一堆数据和FileID为1854796474342856的Name数据。</p>
-<p>通过打开我们制作的Cube的Prefab文件及其meta文件，我们可以看到，Meta文件中的GUID就是那个，而Prefab中存在4126423848245890（Transform）和1854796474342856（GameObject）<br>OK，至此，序列化文件的数据和引用的原理都已完毕。<br>More info: <a href="https://blog.uwa4d.com/archives/USparkle_inf_UnityEngine.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>通过打开我们制作的Cube的Prefab文件及其meta文件，我们可以看到，Meta文件中的GUID就是那个，而Prefab中存在4126423848245890（Transform）和1854796474342856（GameObject）<br>OK，至此，序列化文件的数据和引用的原理都已完毕。<br>More info: <a href="https://blog.uwa4d.com/archives/USparkle_inf_UnityEngine.html" target="_blank" rel="noopener">相关转载</a></p>
 
       
     </div>
@@ -403,6 +418,17 @@
           <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
