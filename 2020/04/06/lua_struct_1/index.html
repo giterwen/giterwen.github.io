@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"github.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在Lua中,分为以下几种数据类型: 123456789101112(lua.h)  72 #define LUA_TNONE   (-1)73 74 #define LUA_TNIL    075 #define LUA_TBOOLEAN    176 #define LUA_TLIGHTUSERDATA  277 #define LUA_TNUMBER   378 #define LUA_TST">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lua中的数据类型">
+<meta property="og:url" content="https://github.com/giterwen/giterwen.github.io.git/2020/04/06/lua_struct_1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在Lua中,分为以下几种数据类型: 123456789101112(lua.h)  72 #define LUA_TNONE   (-1)73 74 #define LUA_TNIL    075 #define LUA_TBOOLEAN    176 #define LUA_TLIGHTUSERDATA  277 #define LUA_TNUMBER   378 #define LUA_TST">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-05T18:25:18.135Z">
+<meta property="article:modified_time" content="2020-04-05T18:26:51.240Z">
+<meta property="article:author" content="giterwen">
+<meta property="article:tag" content="Lua">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://github.com/giterwen/giterwen.github.io.git/2020/04/06/lua_struct_1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Lua中的数据类型 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/04/06/lua_struct_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="giterwen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Lua中的数据类型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-06 02:25:18 / Modified: 02:26:51" itemprop="dateCreated datePublished" datetime="2020-04-06T02:25:18+08:00">2020-04-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lua/" itemprop="url" rel="index"><span itemprop="name">Lua</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在Lua中,分为以下几种数据类型:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(lua.h)  </span><br><span class="line">72 #define LUA_TNONE   (-1)</span><br><span class="line">73 </span><br><span class="line">74 #define LUA_TNIL    0</span><br><span class="line">75 #define LUA_TBOOLEAN    1</span><br><span class="line">76 #define LUA_TLIGHTUSERDATA  2</span><br><span class="line">77 #define LUA_TNUMBER   3</span><br><span class="line">78 #define LUA_TSTRING   4</span><br><span class="line">79 #define LUA_TTABLE    5</span><br><span class="line">80 #define LUA_TFUNCTION   6</span><br><span class="line">81 #define LUA_TUSERDATA   7</span><br><span class="line">82 #define LUA_TTHREAD   8</span><br></pre></td></tr></table></figure>
+<p>其中的LUA_TLIGHTUSERDATA和LUA_TUSERDATA一样,对应的都是void*指针,区别在于,LUA_TLIGHTUSERDATA的分配释放是由Lua外部的使用者来完成,而LUA_TUSERDATA则是通过Lua内部来完成的,换言之,前者不需要Lua去关心它的生存期,由使用者自己去关注,后者则反之.<br>可以看到,LUA_TSTRING(包括LUA_TSTRING)之后的数据类型,都需要进行gc操作.<br>那么,对于这些需要进行gc操作的数据类型,在Lua中是如何表示的呢?<br>这些需要gc的数据类型,都会有一个CommonHeader的成员,并且这个成员在结构体定义的最开始部分,如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(lobject.h)</span><br><span class="line">338 typedef struct Table &#123;</span><br><span class="line">339   CommonHeader;</span><br><span class="line">340   lu_byte flags;  &#x2F;* 1&lt;&lt;p means tagmethod(p) is not present *&#x2F;</span><br><span class="line">341   lu_byte lsizenode;  &#x2F;* log2 of size of &#96;node&#39; array *&#x2F;</span><br><span class="line">342   struct Table *metatable;</span><br><span class="line">343   TValue *array;  &#x2F;* array part *&#x2F;</span><br><span class="line">344   Node *node;</span><br><span class="line">345   Node *lastfree;  &#x2F;* any free position is before this position *&#x2F;</span><br><span class="line">346   GCObject *gclist;</span><br><span class="line">347   int sizearray;  &#x2F;* size of &#96;array&#39; array *&#x2F;</span><br><span class="line">348 &#125; Table;</span><br></pre></td></tr></table></figure>
+<p>其中CommonHeader的定义如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(lobject.h)</span><br><span class="line">39 &#x2F;*</span><br><span class="line">40 ** Common Header for all collectable objects (in macro form, to be</span><br><span class="line">41 ** included in other objects)</span><br><span class="line">42 *&#x2F;</span><br><span class="line">43 #define CommonHeader  GCObject *next; lu_byte tt; lu_byte marked</span><br></pre></td></tr></table></figure>
+<p>同时,还有一个名为GCheader的结构体,其中的成员只有CommonHeader:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(lobject.h)</span><br><span class="line">46 &#x2F;* </span><br><span class="line">47 ** Common header in struct form</span><br><span class="line">48 *&#x2F;             </span><br><span class="line">49 typedef struct GCheader &#123;</span><br><span class="line">50   CommonHeader;</span><br><span class="line">51 &#125; GCheader;</span><br></pre></td></tr></table></figure>
+<p>于是,在Lua中就使用了一个GCObject的union将所有可gc类型囊括了进来:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(lstate.h)</span><br><span class="line">133 &#x2F;*</span><br><span class="line">134 ** Union of all collectable objects</span><br><span class="line">135 *&#x2F;</span><br><span class="line">136 union GCObject &#123;</span><br><span class="line">137   GCheader gch;</span><br><span class="line">138   union TString ts;</span><br><span class="line">139   union Udata u;</span><br><span class="line">140   union Closure cl;</span><br><span class="line">141   struct Table h;</span><br><span class="line">142   struct Proto p;</span><br><span class="line">143   struct UpVal uv;        </span><br><span class="line">144   struct lua_State th;  &#x2F;* thread *&#x2F;</span><br><span class="line">145 &#125;;</span><br></pre></td></tr></table></figure>
+<p>我们整理一下前面提到的这么几个结构体,可以得到这样的结论:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.任何需要gc的Lua数据类型,必然以CommonHeader做为该结构体定义的最开始部分.如果熟悉C++类实现原理的人,可以将</span><br><span class="line">CommonHeader这个成员理解为一个基类的所有成员,而其他需要gc的数据类型均从这个基类中继承下来,所以它们的结构体</span><br><span class="line">定义开始部分都是这个成员.</span><br><span class="line">2.GCObject这个union,将所有需要gc的数据类型全部囊括其中,这样在定位和查找不同类型的数据时就来的方便多了,而如</span><br><span class="line">果只想要它们的GC部分,可以通过GCheader gch,如:</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(lobject.h)</span><br><span class="line">91 #define gcvalue(o)  check_exp(iscollectable(o), (o)-&gt;value.gc)</span><br></pre></td></tr></table></figure>
+<p>仅表示了需要gc的数据类型还不够,还有几种数据类型是不需要gc的,Lua中将GCObject和它们一起放在了union Value中:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(lobject.h)</span><br><span class="line">56 &#x2F;* </span><br><span class="line">57 ** Union of all Lua values</span><br><span class="line">58 *&#x2F; </span><br><span class="line">59 typedef union &#123;           </span><br><span class="line">60   GCObject *gc;           </span><br><span class="line">61   void *p;</span><br><span class="line">62   lua_Number n;           </span><br><span class="line">63   int b;</span><br><span class="line">64 &#125; Value;</span><br></pre></td></tr></table></figure>
+<p>到了这一步,已经差不多可以表示所有在Lua中存在的数据类型了,但是还欠缺一点东西,就是这些数据到底是什么类型的.于是Lua代码中又有了一个TValuefields将Value和类型结合在一起:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(lobject.h)</span><br><span class="line">71 #define TValuefields  Value value; int tt</span><br></pre></td></tr></table></figure>
+<p>这些合在一起,最后形成了Lua中的TValue结构体,在Lua中的任何数据都可以通过该结构体进行表示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(lobject.h)</span><br><span class="line">73 typedef struct lua_TValue &#123;</span><br><span class="line">74   TValuefields;           </span><br><span class="line">75 &#125; TValue;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Lua/" rel="tag"># Lua</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/05/unityengine_asset/" rel="prev" title="Unity文件、文件引用、Meta详解">
+      <i class="fa fa-chevron-left"></i> Unity文件、文件引用、Meta详解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">giterwen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/giterwen" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;giterwen"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wencaker@qq.com" title="E-Mail → mailto:wencaker@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">giterwen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
