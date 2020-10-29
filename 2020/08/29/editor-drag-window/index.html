@@ -20,15 +20,23 @@
     var CONFIG = {"hostname":"github.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://github.com/giterwen/giterwen.github.io.git/tags/Unity/index.html">
+  <meta name="description" content="具体操作如下： 1234567891011121314151617181920212223242526272829303132333435363738394041using UnityEngine;using UnityEditor;public class NodeEditor : EditorWindow&amp;#123;    Rect window1;    Rect window2;    [">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编辑器中实现可拖动窗口">
+<meta property="og:url" content="https://github.com/giterwen/giterwen.github.io.git/2020/08/29/editor-drag-window/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="具体操作如下： 1234567891011121314151617181920212223242526272829303132333435363738394041using UnityEngine;using UnityEditor;public class NodeEditor : EditorWindow&amp;#123;    Rect window1;    Rect window2;    [">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/giterwen/giterwen.github.io.git/2020/08/29/editor-drag-window/drag_window.png">
+<meta property="article:published_time" content="2020-08-29T14:02:42.000Z">
+<meta property="article:modified_time" content="2020-10-29T14:15:12.696Z">
 <meta property="article:author" content="Yesterday Once More">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="Editor">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/giterwen/giterwen.github.io.git/2020/08/29/editor-drag-window/drag_window.png">
 
-<link rel="canonical" href="https://github.com/giterwen/giterwen.github.io.git/tags/Unity/">
+<link rel="canonical" href="https://github.com/giterwen/giterwen.github.io.git/2020/08/29/editor-drag-window/">
 
 
 <script id="page-configurations">
@@ -36,12 +44,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tag: Unity | Hexo</title>
+  <title>编辑器中实现可拖动窗口 | Hexo</title>
   
 
 
@@ -159,71 +167,97 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Unity
-          <small>Tag</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/08/29/editor-drag-window/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yesterday Once More">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          编辑器中实现可拖动窗口
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-29 22:02:42" itemprop="dateCreated datePublished" datetime="2020-08-29T22:02:42+08:00">2020-08-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-10-29 22:15:12" itemprop="dateModified" datetime="2020-10-29T22:15:12+08:00">2020-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-29T22:02:42+08:00"
-              content="2020-08-29">
-          08-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/29/editor-drag-window/" itemprop="url">
-            <span itemprop="name">编辑器中实现可拖动窗口</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-05T16:59:11+08:00"
-              content="2020-04-05">
-          04-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/04/05/unityengine_asset/" itemprop="url">
-            <span itemprop="name">Unity文件、文件引用、Meta详解</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+        <p><img src="drag_window.png" alt=""><br>具体操作如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEditor;</span><br><span class="line">public class NodeEditor : EditorWindow</span><br><span class="line">&#123;</span><br><span class="line">    Rect window1;</span><br><span class="line">    Rect window2;</span><br><span class="line">    [MenuItem(&quot;Window&#x2F;Node editor&quot;)]</span><br><span class="line">    static void ShowEditor()</span><br><span class="line">    &#123;</span><br><span class="line">        NodeEditor editor &#x3D; EditorWindow.GetWindow&lt;NodeEditor&gt;();</span><br><span class="line">        editor.Init();</span><br><span class="line">    &#125;</span><br><span class="line">    public void Init()</span><br><span class="line">    &#123;</span><br><span class="line">        window1 &#x3D; new Rect(10, 10, 100, 100);</span><br><span class="line">        window2 &#x3D; new Rect(210, 210, 100, 100);</span><br><span class="line">    &#125;</span><br><span class="line">    void OnGUI()</span><br><span class="line">    &#123;</span><br><span class="line">        DrawNodeCurve(window1, window2); </span><br><span class="line">        BeginWindows();</span><br><span class="line">        window1 &#x3D; GUI.Window(1, window1, DrawNodeWindow, &quot;Window 1&quot;);   </span><br><span class="line">        window2 &#x3D; GUI.Window(2, window2, DrawNodeWindow, &quot;Window 2&quot;);</span><br><span class="line">        EndWindows();</span><br><span class="line">    &#125;</span><br><span class="line">    void DrawNodeWindow(int id)</span><br><span class="line">    &#123;</span><br><span class="line">        GUI.DragWindow();</span><br><span class="line">    &#125;</span><br><span class="line">    void DrawNodeCurve(Rect start, Rect end)</span><br><span class="line">    &#123;</span><br><span class="line">        Vector3 startPos &#x3D; new Vector3(start.x + start.width, start.y + start.height &#x2F; 2, 0);</span><br><span class="line">        Vector3 endPos &#x3D; new Vector3(end.x, end.y + end.height &#x2F; 2, 0);</span><br><span class="line">        Vector3 startTan &#x3D; startPos + Vector3.right * 50;</span><br><span class="line">        Vector3 endTan &#x3D; endPos + Vector3.left * 50;</span><br><span class="line">        Color shadowCol &#x3D; new Color(0, 0, 0, 0.06f);</span><br><span class="line">        for (int i &#x3D; 0; i &lt; 3; i++) &#x2F;&#x2F; Draw a shadow</span><br><span class="line">            Handles.DrawBezier(startPos, endPos, startTan, endTan, shadowCol, null, (i + 1) * 5);</span><br><span class="line">        Handles.DrawBezier(startPos, endPos, startTan, endTan, Color.black, null, 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Unity/" rel="tag"># Unity</a>
+              <a href="/tags/Editor/" rel="tag"># Editor</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/05/ugui_optimize_3/" rel="prev" title="UGUI优化(三)">
+      <i class="fa fa-chevron-left"></i> UGUI优化(三)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
