@@ -397,6 +397,158 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/07/31/Circle-Sprite/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yesterday Once More">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/31/Circle-Sprite/" class="post-title-link" itemprop="url">圆环的实现(二)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-31 01:30:21" itemprop="dateCreated datePublished" datetime="2020-07-31T01:30:21+08:00">2020-07-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-04 01:09:15" itemprop="dateModified" datetime="2020-11-04T01:09:15+08:00">2020-11-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UGUI/" itemprop="url" rel="index"><span itemprop="name">UGUI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>圆环的另一种实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.UI;</span><br><span class="line"></span><br><span class="line">[ExecuteAlways]</span><br><span class="line">&#x2F;&#x2F;离线生成圆环 图片 缓存在预制体中</span><br><span class="line">public class CircleSprite : MonoBehaviour</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;空白区域色值</span><br><span class="line">    [Header(&quot;空白区域色值&quot;)]</span><br><span class="line">    public Color emptyColor &#x3D; new Color(0, 0, 0, 0);</span><br><span class="line">    &#x2F;&#x2F;圆环区域色值</span><br><span class="line">    [Header(&quot;圆环区域色值&quot;)]</span><br><span class="line">    public Color circleColor &#x3D; Color.white;</span><br><span class="line">    &#x2F;&#x2F;圆环内径&#x2F;外径</span><br><span class="line">    [Header(&quot;圆环内径&quot;)]</span><br><span class="line">    public int minRadius &#x3D; 40;</span><br><span class="line">    [Header(&quot;圆环外径[圆形尺寸]&quot;)]</span><br><span class="line">    public int maxRadius &#x3D; 50;</span><br><span class="line">    &#x2F;&#x2F;扇形角度</span><br><span class="line">    [Header(&quot;扇形角度&quot;)]</span><br><span class="line">    public float circleAngle &#x3D; 90;</span><br><span class="line"></span><br><span class="line">    Color lastColor &#x3D; Color.black;</span><br><span class="line">    Color lastCircleColor &#x3D; Color.black;</span><br><span class="line">    int lastMinRadius &#x3D; 0;</span><br><span class="line">    int lastMaxRadius &#x3D; 0;</span><br><span class="line">    float lastCircleAngle &#x3D; 0;</span><br><span class="line"></span><br><span class="line">    private void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        if (Application.isPlaying) return;</span><br><span class="line">        if (lastColor !&#x3D; emptyColor || lastCircleColor !&#x3D; circleColor || minRadius !&#x3D; lastMinRadius || maxRadius !&#x3D; lastMaxRadius || circleAngle !&#x3D; lastCircleAngle || circleAngle !&#x3D; lastCircleAngle)</span><br><span class="line">        &#123;</span><br><span class="line">            circleAngle &#x3D; Mathf.Clamp(circleAngle, 0, 361);</span><br><span class="line">            minRadius &#x3D; minRadius &gt; maxRadius ? maxRadius : minRadius;</span><br><span class="line">            lastColor &#x3D; emptyColor;</span><br><span class="line">            lastCircleColor &#x3D; circleColor;</span><br><span class="line">            lastMinRadius &#x3D; minRadius;</span><br><span class="line">            lastMaxRadius &#x3D; maxRadius;</span><br><span class="line">            lastCircleAngle &#x3D; circleAngle;</span><br><span class="line">            var sprite &#x3D; CreateSprite(minRadius, maxRadius, circleAngle &#x2F; 2, circleColor);</span><br><span class="line">            sprite.name &#x3D; &quot;cirlce&quot;;</span><br><span class="line">            this.GetComponent&lt;Image&gt;().sprite &#x3D; sprite;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;summary&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; 绘制扇形圆环，生成Sprite</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;param name&#x3D;&quot;minRadius&quot;&gt;圆环内径，值为0即是实心圆&lt;&#x2F;param&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;param name&#x3D;&quot;maxRadius&quot;&gt;圆环外径&lt;&#x2F;param&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;param name&#x3D;&quot;circleAngle&quot;&gt;1&#x2F;2扇形弧度，值&gt;&#x3D;180度即是整园&lt;&#x2F;param&gt;</span><br><span class="line">    Sprite CreateSprite(int minRadius, int maxRadius, float halfAngle, Color circleColor)</span><br><span class="line">    &#123;</span><br><span class="line">        &#x2F;&#x2F;图片尺寸</span><br><span class="line">        int spriteSize &#x3D; maxRadius * 2;</span><br><span class="line">        &#x2F;&#x2F;创建Texture2D</span><br><span class="line">        Texture2D texture2D &#x3D; new Texture2D(spriteSize, spriteSize);</span><br><span class="line">        &#x2F;&#x2F;图片中心像素点坐标</span><br><span class="line">        Vector2 centerPixel &#x3D; new Vector2(spriteSize &#x2F; 2, spriteSize &#x2F; 2);</span><br><span class="line">        &#x2F;&#x2F;</span><br><span class="line">        Vector2 tempPixel;</span><br><span class="line">        float tempAngle, tempDisSqr;</span><br><span class="line">        if (halfAngle &gt; 0 &amp;&amp; halfAngle &lt; 360)</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F;遍历像素点，绘制扇形圆环</span><br><span class="line">            for (int x &#x3D; 0; x &lt; spriteSize; x++)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int y &#x3D; 0; y &lt; spriteSize; y++)</span><br><span class="line">                &#123;</span><br><span class="line">                    &#x2F;&#x2F;以中心作为起点，获取像素点向量</span><br><span class="line">                    tempPixel.x &#x3D; x - centerPixel.x;</span><br><span class="line">                    tempPixel.y &#x3D; y - centerPixel.y;</span><br><span class="line">                    &#x2F;&#x2F;是否在半径范围内</span><br><span class="line">                    tempDisSqr &#x3D; tempPixel.sqrMagnitude;</span><br><span class="line">                    if (tempDisSqr &gt;&#x3D; minRadius * minRadius &amp;&amp; tempDisSqr &lt;&#x3D; maxRadius * maxRadius)</span><br><span class="line">                    &#123;</span><br><span class="line">                        &#x2F;&#x2F;是否在角度范围内</span><br><span class="line">                        tempAngle &#x3D; Vector2.Angle(Vector2.up, tempPixel);</span><br><span class="line">                        if (tempAngle &lt; halfAngle || tempAngle &gt; 360 - halfAngle)</span><br><span class="line">                        &#123;</span><br><span class="line">                            &#x2F;&#x2F;设置像素色值</span><br><span class="line">                            texture2D.SetPixel(x, y, circleColor);</span><br><span class="line">                            continue;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    &#x2F;&#x2F;设置为透明</span><br><span class="line">                    texture2D.SetPixel(x, y, emptyColor);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F;遍历像素点，绘制圆环</span><br><span class="line">            for (int x &#x3D; 0; x &lt; spriteSize; x++)</span><br><span class="line">            &#123;</span><br><span class="line">                for (int y &#x3D; 0; y &lt; spriteSize; y++)</span><br><span class="line">                &#123;</span><br><span class="line">                    &#x2F;&#x2F;以中心作为起点，获取像素点向量</span><br><span class="line">                    tempPixel.x &#x3D; x - centerPixel.x;</span><br><span class="line">                    tempPixel.y &#x3D; y - centerPixel.y;</span><br><span class="line">                    &#x2F;&#x2F;是否在半径范围内</span><br><span class="line">                    tempDisSqr &#x3D; tempPixel.sqrMagnitude;</span><br><span class="line">                    if (tempDisSqr &gt;&#x3D; minRadius * minRadius &amp;&amp; tempDisSqr &lt;&#x3D; maxRadius * maxRadius)</span><br><span class="line">                    &#123;</span><br><span class="line">                        &#x2F;&#x2F;设置像素色值</span><br><span class="line">                        texture2D.SetPixel(x, y, circleColor);</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125;</span><br><span class="line">                    &#x2F;&#x2F;设置为透明</span><br><span class="line">                    texture2D.SetPixel(x, y, emptyColor);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        texture2D.Apply();</span><br><span class="line">        &#x2F;&#x2F;创建Sprite</span><br><span class="line">        return Sprite.Create(texture2D, new Rect(0, 0, spriteSize, spriteSize), new Vector2(0.5f, 0.5f));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/07/31/Circle-Image/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yesterday Once More">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/31/Circle-Image/" class="post-title-link" itemprop="url">圆环的实现(一)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-31 01:27:21" itemprop="dateCreated datePublished" datetime="2020-07-31T01:27:21+08:00">2020-07-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-04 01:06:21" itemprop="dateModified" datetime="2020-11-04T01:06:21+08:00">2020-11-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/UGUI/" itemprop="url" rel="index"><span itemprop="name">UGUI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>圆环的一种实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br></pre></td><td class="code"><pre><span class="line">using System.Collections.Generic;</span><br><span class="line">using UnityEngine;</span><br><span class="line">using UnityEngine.UI;</span><br><span class="line">using UnityEngine.Sprites;</span><br><span class="line">using System;</span><br><span class="line">using System.Collections;</span><br><span class="line">using UnityEngine.Serialization;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;[AddComponentMenu(&quot;UI&#x2F;Circle Image&quot;)]</span><br><span class="line">public class CircleImage : MaskableGraphic, ISerializationCallbackReceiver, ILayoutElement, ICanvasRaycastFilter</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    [FormerlySerializedAs(&quot;m_Frame&quot;)]</span><br><span class="line">    [SerializeField]</span><br><span class="line">    private Sprite m_Sprite;</span><br><span class="line">    public Sprite sprite &#123; get &#123; return m_Sprite; &#125; set &#123; if (SetPropertyUtilityExt.SetClass(ref m_Sprite, value)) SetAllDirty(); &#125; &#125;</span><br><span class="line"></span><br><span class="line">    [NonSerialized]</span><br><span class="line">    private Sprite m_OverrideSprite;</span><br><span class="line">    public Sprite overrideSprite &#123; get &#123; return m_OverrideSprite &#x3D;&#x3D; null ? sprite : m_OverrideSprite; &#125; set &#123; if (SetPropertyUtilityExt.SetClass(ref m_OverrideSprite, value)) SetAllDirty(); &#125; &#125;</span><br><span class="line"></span><br><span class="line">    [Header(&quot;圆形或扇形填充比例&quot;)]</span><br><span class="line">    [Range(0, 1)]</span><br><span class="line">    public float fillPercent &#x3D; 1f;</span><br><span class="line">    [Header(&quot;是否填充圆形&quot;)]</span><br><span class="line">    public bool fill &#x3D; true;</span><br><span class="line">    [Header(&quot;圆环宽度&quot;)]</span><br><span class="line">    public float thickness &#x3D; 5;</span><br><span class="line">    [Header(&quot;圆形精度&quot;)]</span><br><span class="line">    [Range(3, 100)]</span><br><span class="line">    public int segements &#x3D; 20;</span><br><span class="line"></span><br><span class="line">    private List&lt;Vector3&gt; innerVertices;</span><br><span class="line">    private List&lt;Vector3&gt; outterVertices;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Use this for initialization</span><br><span class="line">    void Awake()</span><br><span class="line">    &#123;</span><br><span class="line">        innerVertices &#x3D; new List&lt;Vector3&gt;();</span><br><span class="line">        outterVertices &#x3D; new List&lt;Vector3&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Update is called once per frame</span><br><span class="line">    void Update()</span><br><span class="line">    &#123;</span><br><span class="line">        this.thickness &#x3D; (float)Mathf.Clamp(this.thickness, 0, rectTransform.rect.width &#x2F; 2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    protected override void OnPopulateMesh(VertexHelper vh)</span><br><span class="line">    &#123;</span><br><span class="line">        vh.Clear();</span><br><span class="line"></span><br><span class="line">        innerVertices.Clear();</span><br><span class="line">        outterVertices.Clear();</span><br><span class="line"></span><br><span class="line">        float degreeDelta &#x3D; (float)(2 * Mathf.PI &#x2F; segements);</span><br><span class="line">        int curSegements &#x3D; (int)(segements * fillPercent);</span><br><span class="line"></span><br><span class="line">        float tw &#x3D; rectTransform.rect.width;</span><br><span class="line">        float th &#x3D; rectTransform.rect.height;</span><br><span class="line">        float outerRadius &#x3D; rectTransform.pivot.x * tw;</span><br><span class="line">        float innerRadius &#x3D; rectTransform.pivot.x * tw - thickness;</span><br><span class="line"></span><br><span class="line">        Vector4 uv &#x3D; overrideSprite !&#x3D; null ? DataUtility.GetOuterUV(overrideSprite) : Vector4.zero;</span><br><span class="line"></span><br><span class="line">        float uvCenterX &#x3D; (uv.x + uv.z) * 0.5f;</span><br><span class="line">        float uvCenterY &#x3D; (uv.y + uv.w) * 0.5f;</span><br><span class="line">        float uvScaleX &#x3D; (uv.z - uv.x) &#x2F; tw;</span><br><span class="line">        float uvScaleY &#x3D; (uv.w - uv.y) &#x2F; th;</span><br><span class="line"></span><br><span class="line">        float curDegree &#x3D; 0;</span><br><span class="line">        UIVertex uiVertex;</span><br><span class="line">        int verticeCount;</span><br><span class="line">        int triangleCount;</span><br><span class="line">        Vector2 curVertice;</span><br><span class="line"></span><br><span class="line">        if (fill) &#x2F;&#x2F;圆形</span><br><span class="line">        &#123;</span><br><span class="line">            curVertice &#x3D; Vector2.zero;</span><br><span class="line">            verticeCount &#x3D; curSegements + 1;</span><br><span class="line">            uiVertex &#x3D; new UIVertex();</span><br><span class="line">            uiVertex.color &#x3D; color;</span><br><span class="line">            uiVertex.position &#x3D; curVertice;</span><br><span class="line">            uiVertex.uv0 &#x3D; new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY);</span><br><span class="line">            vh.AddVert(uiVertex);</span><br><span class="line"></span><br><span class="line">            for (int i &#x3D; 1; i &lt; verticeCount; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                float cosA &#x3D; Mathf.Cos(curDegree);</span><br><span class="line">                float sinA &#x3D; Mathf.Sin(curDegree);</span><br><span class="line">                curVertice &#x3D; new Vector2(cosA * outerRadius, sinA * outerRadius);</span><br><span class="line">                curDegree +&#x3D; degreeDelta;</span><br><span class="line"></span><br><span class="line">                uiVertex &#x3D; new UIVertex();</span><br><span class="line">                uiVertex.color &#x3D; color;</span><br><span class="line">                uiVertex.position &#x3D; curVertice;</span><br><span class="line">                uiVertex.uv0 &#x3D; new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY);</span><br><span class="line">                vh.AddVert(uiVertex);</span><br><span class="line"></span><br><span class="line">                outterVertices.Add(curVertice);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            triangleCount &#x3D; curSegements * 3;</span><br><span class="line">            for (int i &#x3D; 0, vIdx &#x3D; 1; i &lt; triangleCount - 3; i +&#x3D; 3, vIdx++)</span><br><span class="line">            &#123;</span><br><span class="line">                vh.AddTriangle(vIdx, 0, vIdx + 1);</span><br><span class="line">            &#125;</span><br><span class="line">            if (fillPercent &#x3D;&#x3D; 1)</span><br><span class="line">            &#123;</span><br><span class="line">                &#x2F;&#x2F;首尾顶点相连</span><br><span class="line">                vh.AddTriangle(verticeCount - 1, 0, 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        else&#x2F;&#x2F;圆环</span><br><span class="line">        &#123;</span><br><span class="line">            verticeCount &#x3D; curSegements * 2;</span><br><span class="line">            for (int i &#x3D; 0; i &lt; verticeCount; i +&#x3D; 2)</span><br><span class="line">            &#123;</span><br><span class="line">                float cosA &#x3D; Mathf.Cos(curDegree);</span><br><span class="line">                float sinA &#x3D; Mathf.Sin(curDegree);</span><br><span class="line">                curDegree +&#x3D; degreeDelta;</span><br><span class="line"></span><br><span class="line">                curVertice &#x3D; new Vector3(cosA * innerRadius, sinA * innerRadius);</span><br><span class="line">                uiVertex &#x3D; new UIVertex();</span><br><span class="line">                uiVertex.color &#x3D; color;</span><br><span class="line">                uiVertex.position &#x3D; curVertice;</span><br><span class="line">                uiVertex.uv0 &#x3D; new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY);</span><br><span class="line">                vh.AddVert(uiVertex);</span><br><span class="line">                innerVertices.Add(curVertice);</span><br><span class="line"></span><br><span class="line">                curVertice &#x3D; new Vector3(cosA * outerRadius, sinA * outerRadius);</span><br><span class="line">                uiVertex &#x3D; new UIVertex();</span><br><span class="line">                uiVertex.color &#x3D; color;</span><br><span class="line">                uiVertex.position &#x3D; curVertice;</span><br><span class="line">                uiVertex.uv0 &#x3D; new Vector2(curVertice.x * uvScaleX + uvCenterX, curVertice.y * uvScaleY + uvCenterY);</span><br><span class="line">                vh.AddVert(uiVertex);</span><br><span class="line">                outterVertices.Add(curVertice);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            triangleCount &#x3D; curSegements * 3 * 2;</span><br><span class="line">            for (int i &#x3D; 0, vIdx &#x3D; 0; i &lt; triangleCount - 6; i +&#x3D; 6, vIdx +&#x3D; 2)</span><br><span class="line">            &#123;</span><br><span class="line">                vh.AddTriangle(vIdx + 1, vIdx, vIdx + 3);</span><br><span class="line">                vh.AddTriangle(vIdx, vIdx + 2, vIdx + 3);</span><br><span class="line">            &#125;</span><br><span class="line">            if (fillPercent &#x3D;&#x3D; 1)</span><br><span class="line">            &#123;</span><br><span class="line">                &#x2F;&#x2F;首尾顶点相连</span><br><span class="line">                vh.AddTriangle(verticeCount - 1, verticeCount - 2, 1);</span><br><span class="line">                vh.AddTriangle(verticeCount - 2, 0, 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public virtual bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera)</span><br><span class="line">    &#123;</span><br><span class="line">        Sprite sprite &#x3D; overrideSprite;</span><br><span class="line">        if (sprite &#x3D;&#x3D; null)</span><br><span class="line">            return true;</span><br><span class="line"></span><br><span class="line">        Vector2 local;</span><br><span class="line">        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, screenPoint, eventCamera, out local);</span><br><span class="line">        return Contains(local, outterVertices, innerVertices);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private bool Contains(Vector2 p, List&lt;Vector3&gt; outterVertices, List&lt;Vector3&gt; innerVertices)</span><br><span class="line">    &#123;</span><br><span class="line">        var crossNumber &#x3D; 0;</span><br><span class="line">        RayCrossing(p, innerVertices, ref crossNumber);&#x2F;&#x2F;检测内环</span><br><span class="line">        RayCrossing(p, outterVertices, ref crossNumber);&#x2F;&#x2F;检测外环</span><br><span class="line">        return (crossNumber &amp; 1) &#x3D;&#x3D; 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;summary&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; 使用RayCrossing算法判断点击点是否在封闭多边形里</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;param name&#x3D;&quot;p&quot;&gt;&lt;&#x2F;param&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;param name&#x3D;&quot;vertices&quot;&gt;&lt;&#x2F;param&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;param name&#x3D;&quot;crossNumber&quot;&gt;&lt;&#x2F;param&gt;</span><br><span class="line">    private void RayCrossing(Vector2 p, List&lt;Vector3&gt; vertices, ref int crossNumber)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i &#x3D; 0, count &#x3D; vertices.Count; i &lt; count; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            var v1 &#x3D; vertices[i];</span><br><span class="line">            var v2 &#x3D; vertices[(i + 1) % count];</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;点击点水平线必须与两顶点线段相交</span><br><span class="line">            if (((v1.y &lt;&#x3D; p.y) &amp;&amp; (v2.y &gt; p.y))</span><br><span class="line">                || ((v1.y &gt; p.y) &amp;&amp; (v2.y &lt;&#x3D; p.y)))</span><br><span class="line">            &#123;</span><br><span class="line">                &#x2F;&#x2F;只考虑点击点右侧方向，点击点水平线与线段相交，且交点x &gt; 点击点x，则crossNumber+1</span><br><span class="line">                if (p.x &lt; v1.x + (p.y - v1.y) &#x2F; (v2.y - v1.y) * (v2.x - v1.x))</span><br><span class="line">                &#123;</span><br><span class="line">                    crossNumber +&#x3D; 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;summary&gt;</span><br><span class="line">    &#x2F;&#x2F;&#x2F; Image&#39;s texture comes from the UnityEngine.Image.</span><br><span class="line">    &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;</span><br><span class="line">    public override Texture mainTexture</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            return overrideSprite &#x3D;&#x3D; null ? s_WhiteTexture : overrideSprite.texture;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public float pixelsPerUnit</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            float spritePixelsPerUnit &#x3D; 100;</span><br><span class="line">            if (sprite)</span><br><span class="line">                spritePixelsPerUnit &#x3D; sprite.pixelsPerUnit;</span><br><span class="line"></span><br><span class="line">            float referencePixelsPerUnit &#x3D; 100;</span><br><span class="line">            if (canvas)</span><br><span class="line">                referencePixelsPerUnit &#x3D; canvas.referencePixelsPerUnit;</span><br><span class="line"></span><br><span class="line">            return spritePixelsPerUnit &#x2F; referencePixelsPerUnit;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; &#x2F;&#x2F;&#x2F; &lt;summary&gt;</span><br><span class="line">    &#x2F;&#x2F; &#x2F;&#x2F;&#x2F; 子类需要重写该方法来自定义Image形状</span><br><span class="line">    &#x2F;&#x2F; &#x2F;&#x2F;&#x2F; &lt;&#x2F;summary&gt;</span><br><span class="line">    &#x2F;&#x2F; &#x2F;&#x2F;&#x2F; &lt;param name&#x3D;&quot;vh&quot;&gt;&lt;&#x2F;param&gt;</span><br><span class="line">    &#x2F;&#x2F; protected override void OnPopulateMesh(VertexHelper vh)</span><br><span class="line">    &#x2F;&#x2F; &#123;</span><br><span class="line">    &#x2F;&#x2F;     base.OnPopulateMesh(vh);</span><br><span class="line">    &#x2F;&#x2F; &#125;</span><br><span class="line"></span><br><span class="line">    #region ISerializationCallbackReceiver</span><br><span class="line">    public void OnAfterDeserialize()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;</span><br><span class="line">    &#x2F;&#x2F; 摘要: </span><br><span class="line">    &#x2F;&#x2F;     Implement this method to receive a callback after unity serialized your object.</span><br><span class="line">    public void OnBeforeSerialize()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    #endregion</span><br><span class="line"></span><br><span class="line">    #region ILayoutElement</span><br><span class="line">    public virtual void CalculateLayoutInputHorizontal() &#123; &#125;</span><br><span class="line">    public virtual void CalculateLayoutInputVertical() &#123; &#125;</span><br><span class="line"></span><br><span class="line">    public virtual float minWidth &#123; get &#123; return 0; &#125; &#125;</span><br><span class="line"></span><br><span class="line">    public virtual float preferredWidth</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            if (overrideSprite &#x3D;&#x3D; null)</span><br><span class="line">                return 0;</span><br><span class="line">            return overrideSprite.rect.size.x &#x2F; pixelsPerUnit;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public virtual float flexibleWidth &#123; get &#123; return -1; &#125; &#125;</span><br><span class="line"></span><br><span class="line">    public virtual float minHeight &#123; get &#123; return 0; &#125; &#125;</span><br><span class="line"></span><br><span class="line">    public virtual float preferredHeight</span><br><span class="line">    &#123;</span><br><span class="line">        get</span><br><span class="line">        &#123;</span><br><span class="line">            if (overrideSprite &#x3D;&#x3D; null)</span><br><span class="line">                return 0;</span><br><span class="line">            return overrideSprite.rect.size.y &#x2F; pixelsPerUnit;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public virtual float flexibleHeight &#123; get &#123; return -1; &#125; &#125;</span><br><span class="line"></span><br><span class="line">    public virtual int layoutPriority &#123; get &#123; return 0; &#125; &#125;</span><br><span class="line">    #endregion</span><br><span class="line"></span><br><span class="line">    #region ICanvasRaycastFilter</span><br><span class="line">    &#x2F;&#x2F; public virtual bool IsRaycastLocationValid(Vector2 screenPoint, Camera eventCamera)</span><br><span class="line">    &#x2F;&#x2F; &#123;</span><br><span class="line">    &#x2F;&#x2F;     return true;</span><br><span class="line">    &#x2F;&#x2F; &#125;</span><br><span class="line">    #endregion</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">internal static class SetPropertyUtilityExt</span><br><span class="line">&#123;</span><br><span class="line">    public static bool SetColor(ref Color currentValue, Color newValue)</span><br><span class="line">    &#123;</span><br><span class="line">        if (currentValue.r &#x3D;&#x3D; newValue.r &amp;&amp; currentValue.g &#x3D;&#x3D; newValue.g &amp;&amp; currentValue.b &#x3D;&#x3D; newValue.b &amp;&amp; currentValue.a &#x3D;&#x3D; newValue.a)</span><br><span class="line">            return false;</span><br><span class="line"></span><br><span class="line">        currentValue &#x3D; newValue;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static bool SetStruct&lt;T&gt;(ref T currentValue, T newValue) where T : struct</span><br><span class="line">    &#123;</span><br><span class="line">        if (currentValue.Equals(newValue))</span><br><span class="line">            return false;</span><br><span class="line"></span><br><span class="line">        currentValue &#x3D; newValue;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static bool SetClass&lt;T&gt;(ref T currentValue, T newValue) where T : class</span><br><span class="line">    &#123;</span><br><span class="line">        if ((currentValue &#x3D;&#x3D; null &amp;&amp; newValue &#x3D;&#x3D; null) || (currentValue !&#x3D; null &amp;&amp; currentValue.Equals(newValue)))</span><br><span class="line">            return false;</span><br><span class="line"></span><br><span class="line">        currentValue &#x3D; newValue;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/07/05/ugui_optimize_3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -792,196 +944,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/04/05/unityengine_asset/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yesterday Once More">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/05/unityengine_asset/" class="post-title-link" itemprop="url">Unity文件、文件引用、Meta详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-05 16:59:11" itemprop="dateCreated datePublished" datetime="2020-04-05T16:59:11+08:00">2020-04-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-06 01:43:11" itemprop="dateModified" datetime="2020-04-06T01:43:11+08:00">2020-04-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文详细讲解了Unity引擎各种类型文件的信息内容、用法和使用场景，帮助研发团队对于引擎文件进行更好的理解和掌握。</p>
-<h2 id="一、Unity项目中Assets目录下常见的文件类型"><a href="#一、Unity项目中Assets目录下常见的文件类型" class="headerlink" title="一、Unity项目中Assets目录下常见的文件类型"></a>一、Unity项目中Assets目录下常见的文件类型</h2><p>在Unity3d中一般存在这么几种文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">资源文件</span><br><span class="line">代码文件</span><br><span class="line">序列化文件</span><br><span class="line">文本文档</span><br><span class="line">非序列化文件</span><br><span class="line">Meta文件</span><br></pre></td></tr></table></figure>
-<h4 id="1、资源文件"><a href="#1、资源文件" class="headerlink" title="1、资源文件"></a>1、资源文件</h4><p>资源文件指一些创建好并且不再修改的文件。这样的文件一般是美术设计师和音频视频设计师创造的文件，比如FBX文件、贴图文件、音频文件、视频文件和动画文件（虽然动画文件可以被认为是配置文件，不过在由于一般不会去做修改，所以也认为是资源文件）。像这类文件，Unity中都会在导入时进行转化。每一个类型都对应一个AssetImporter，比如AudioImporter、TextureImporter、ModelImport等等。在Unity中点击这样的资源，在Inspector面板会出现设置界面。</p>
-<h4 id="2、代码文件"><a href="#2、代码文件" class="headerlink" title="2、代码文件"></a>2、代码文件</h4><p>代码文件包括所有的代码文件、代码库文件、Shader文件等。在导入时，Unity会进行一次编译。</p>
-<h4 id="3、序列化文件（数据文件）"><a href="#3、序列化文件（数据文件）" class="headerlink" title="3、序列化文件（数据文件）"></a>3、序列化文件（数据文件）</h4><p>序列化文件通常是指Unity能够序列化的文件，一般是Unity自身的一些类型，比如Prefab(预制体)、Unity3d(场景)文件、Asset(ScriptableObject)文件、Mat文件(材质球)，这些文件能够在运行时直接反序列化为对应类的一个实例。</p>
-<h4 id="4、文本文档"><a href="#4、文本文档" class="headerlink" title="4、文本文档"></a>4、文本文档</h4><p>文本文档比较特殊，它不是序列化文件，但是Unity可以识别为TextAsset。很像资源文件，但是又不需要资源文件那样进行设置和转化，比如txt、xml文件等等。</p>
-<h4 id="5、非序列化文件"><a href="#5、非序列化文件" class="headerlink" title="5、非序列化文件"></a>5、非序列化文件</h4><p>非序列文件是Unity无法识别的文件，比如一个文件夹也会被认为是一个文件，但是无法识别。</p>
-<h4 id="6、Meta文件"><a href="#6、Meta文件" class="headerlink" title="6、Meta文件"></a>6、Meta文件</h4><p>Meta文件在Unity中的作用非常关键，它有2个作用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">定义在它同目录下，同名的非Meta文件的唯一ID：GUID。而对于Unity的序列化文件来说，引用的对象用的就是这个GUID。</span><br><span class="line">所以一旦Meta中的GUID变更了，就要注意，它很可能引起一场引用丢失的灾难。</span><br><span class="line"></span><br><span class="line">存储资源文件的ImportSetting数据。在上文中资源文件是有ImportSetting数据的，这个数据正数存储在Meta文件中。</span><br><span class="line">ImportSetting中专门有存储Assetbundle相关的数据。这些数据帮助编辑器去搜集所有需要打包的文件并分门别类。所以每一次修改配置都会修改meta文件。</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、Meta文件详解——Unity-GUID-LocalID系统"><a href="#二、Meta文件详解——Unity-GUID-LocalID系统" class="headerlink" title="二、Meta文件详解——Unity GUID/LocalID系统"></a>二、Meta文件详解——Unity GUID/LocalID系统</h2><p>由于Meta文件的重要性，这里先说说Meta文件的数据结构。Meta文件实质上是一个文本文档，只是采用的是一种叫做YAML的格式来写的（见Description of the Format）。Unity中的序列化文件都是用这个格式类写的，比如Prefab、场景等（后文会继续）。</p>
-<h4 id="1、GUID"><a href="#1、GUID" class="headerlink" title="1、GUID"></a>1、GUID</h4><p>Guid是Meta中最最最重要的数据。这个Guid代表了这个文件，无论这个文件是什么类型（甚至是文件夹）。换句话说，通过GUID就可以找到工程中的这个文件，无论它在项目的什么位置。在编辑器中使用AssetDatabase.GUIDToAssetPath和AssetDatabase.AssetPathToGUID进行互转。</p>
-<p>所以在每次svn提交时如果发现有Meta文件变更，一定要打开看一下。看看这个Guid是否被更改。理论上是不需要更改的。</p>
-<h4 id="2、ImportSetting数据"><a href="#2、ImportSetting数据" class="headerlink" title="2、ImportSetting数据"></a>2、ImportSetting数据</h4><p>后面比较重要的数据是ImportSetting数据。根据不同的文件类型，它的数据是不同的ImportSetting数据，比如上面的NativeFormatImporter、ModelImporter、AudioImporter等等。只要对照Inspector面板中的条目，都可以看懂每一行的意义。</p>
-<p>所以知道这个之后，我们可以发现，假如我们把一个文件和这个文件的Meta文件从一个Unity工程复制到另一个Unity工程中，它的配置是不会变的（以前在2个工程手动裁剪同一个模型的20个动画真是傻到家了，直接将这个Fbx和它的Meta文件拷贝过去就行！）。</p>
-<h4 id="3、FileID（LocalID）"><a href="#3、FileID（LocalID）" class="headerlink" title="3、FileID（LocalID）"></a>3、FileID（LocalID）</h4><p>有一个问题是，如果是一个图集，下面有若干个图片，那么，这个GUID怎么对应一个文件呢？是的，对于一个文件下有多个文件的情况，就需要另外一个ID来表示，这就是LocalID。更习惯用Meta文件中的名字FileID。FileID存储方式有2种：</p>
-<p>对于资源文件，非序列化文件，由于一般不会去更改源文件，所以FileID存储在meta文件中。</p>
-<p>对于序列化文件，自身数据里面会存储自身的FileID，也会记录所有子文件的FileID（更多关于序列化文件的数据，见下文）。比如对于这样的AnimatorController。它本身的数据如下，除了本身的FileID为9100000外，记录了4个AnimatorClip的FileID。而meta文件中只有自身的FileID。</p>
-<p>回到本节一开始的问题，如果是图集，因为是图片本身是资源文件，所以会有FileID存储在对应的Meta文件中。</p>
-<p>至此就是整个Unity的GUID/LocalID系统的基础了。通过GUID找到任何一个文件，通过FileID找到其中的某个子文件。</p>
-<h2 id="三、序列化文件详解——Unity文件引用系统"><a href="#三、序列化文件详解——Unity文件引用系统" class="headerlink" title="三、序列化文件详解——Unity文件引用系统"></a>三、序列化文件详解——Unity文件引用系统</h2><p>上文已经提到，对于所有的序列化文件，Unity采用的是YAML来书写。所以对于一个Unity3d(场景)文件、prefab文件、材质、控制器等都可以用文本文档软件打开。这里还是用Notepad++打开。</p>
-<p>为了能够简洁地说明问题，我们在Unity中创建一个新的场景，然后创建2个Cube，一个做成Prefab。<br>可以看到大概的数据：</p>
-<p>OcclusionCullingSettings裁剪数据（菜单Window-&gt;Occlusion面板中的数据）<br>RenderSettings（菜单Window-&gt;Lighting-&gt;Settings面板中的部分数据）<br>LightmapSettings（菜单Window-&gt;Lighting-&gt;Settings面板中的其他部分数据）<br>NavMeshSettings（菜单Window-&gt;Navigation面板中的数据）<br>之后就是场景中的物件的数据</p>
-<h4 id="1、GameObject数据"><a href="#1、GameObject数据" class="headerlink" title="1、GameObject数据"></a>1、GameObject数据</h4><p>展开第一个GameObject数据，可以看到这个的Name就是Main Camera（如果你的第一个GameObject数据不是Main Camera也没关系，下面肯定某一个是Main Camera，展开那个数据也是一样的结构）。</p>
-<p>这个物体上有4个组件，一一对应下面的数据。这就是物体内的引用关系。每一个Unity对象都会有一个FileID，然后在需要引用时，使用这些FileID即可。所以在实例化一个这样的GameObject时，只要依照次序，依次创建物体，组件，初始化数据并进行引用绑定即可在场景中生成一个实例。</p>
-<p>我们在Inspector面板中的右上角点击，然后选择Debug转成Debug模式下的Inspector面板：</p>
-<p>在Hierarchy面板中选中Main Camera可以看到如图所示，所有的组件的LocalIdentfierInFile的值就是刚刚在Notepad++中看到的数据：</p>
-<p>这里有一点，我们看到有一个叫做InstanceID的数据。这个是Unity中一个实例的ID。每一个Unity实例都会有一个InstanceID。在运行时，可以使用UnityEngine.Object的GetInstanceID获取。但是要注意的是，每一次运行，相当于重新生成了新的实例，所以这个值是可变的。</p>
-<h4 id="2、组件数据"><a href="#2、组件数据" class="headerlink" title="2、组件数据"></a>2、组件数据</h4><p>在GameObject之后就是这个GameObject的组件数据（不知道次序会不会乱，理论上不影响）。每一个组件的数据基本上就是这个组件的一堆参数了。可以结合Unity中这个组件的面板来了解每一个数据的意义。</p>
-<p>这里有一个问题，比如这里有一个组件是FlareLayer，但是在YAML里面只是一个Behaviour（所有Behaviour组件都看不到类型名字），怎么样才能知道他是一个FlareLayer？</p>
-<p>可以看到在这个数据上方，在FileID左边我们看到一个124。对，这个就是FlareLayer。请参考YAML Class ID Reference，每一个Unity类型都有一个对应的数字。</p>
-<p>那么自定义脚本类呢？</p>
-<p>我们创建一个Test脚本，继承MonoBehaviour。里面什么都不写。添加到Main Camera物体上。保存场景然后回到Notepad++。</p>
-<p>可以看到多了一个MonoBehaviour，并且这个里面有一个M_Script数据，指向对应的GUID及其FileID。上文我们已经说了，任何一个文件都可以通过GUID找到，然后通过FileID找到它内部的子文件。所以这样就能识别出这个具体是什么类了。</p>
-<p>我们往Test中写2个字段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Public int A;</span><br><span class="line">Public Test RefTest;</span><br></pre></td></tr></table></figure>
-<p>在Main Camera中，设置Test脚本的A值为111，RefTest设置为自身。保存后回到Notepad++;<br>看到数据想必都明白了。</p>
-<p>可以往Test中写一些其他类型的数据，看看这些序列化数据放在YAML的哪个位置！这里不再展开（这些数据和编辑器的SerializedProperty息息相关）。</p>
-<h4 id="3、Prefab数据"><a href="#3、Prefab数据" class="headerlink" title="3、Prefab数据"></a>3、Prefab数据</h4><p>在YAML的最下面有一个数据是Prefab数据：</p>
-<p>看起来很复杂，但是实际上，它就保存了最重要的几个数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Modification：每个组件的修改数据列表，但凡修改的数据，都会在这里体现。</span><br><span class="line">ParentPrefab：表示是哪一个Prefab。</span><br></pre></td></tr></table></figure>
-<p>所以上面的数据就是GUID为27f1445c35c923741a22e4948c4da980的Prefab，修改后的FileID为4126423848245890的一堆数据和FileID为1854796474342856的Name数据。</p>
-<p>通过打开我们制作的Cube的Prefab文件及其meta文件，我们可以看到，Meta文件中的GUID就是那个，而Prefab中存在4126423848245890（Transform）和1854796474342856（GameObject）<br>OK，至此，序列化文件的数据和引用的原理都已完毕。<br>More info: <a href="https://blog.uwa4d.com/archives/USparkle_inf_UnityEngine.html" target="_blank" rel="noopener">相关转载</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/04/05/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yesterday Once More">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/05/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-05 14:53:19 / Modified: 15:24:14" itemprop="dateCreated datePublished" datetime="2020-04-05T14:53:19+08:00">2020-04-05</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1046,7 +1013,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
