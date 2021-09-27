@@ -165,6 +165,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2021/08/25/%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yesterday Once More">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/25/%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">红点系统管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-08-25 20:36:01" itemprop="dateCreated datePublished" datetime="2021-08-25T20:36:01+08:00">2021-08-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-28 02:18:10" itemprop="dateModified" datetime="2021-09-28T02:18:10+08:00">2021-09-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity/" itemprop="url" rel="index"><span itemprop="name">Unity</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>整个红点管理采用树形结构，大概分为三部分：</p>
+<p>1.redPointModule，该moudle主要负责红点的绑定和移除监听管理</p>
+<p>2.redPointEvents，该模块主要是定义各个系统模块功能红点的事件，以及枚举红点类型，红点依赖的profile声明。</p>
+<p>3.CommonUI_RedPoint，红点的实体类，是作为一个cell嵌套到各个红点依赖的实例内部，这个实体cell和普通cell无异，由UI管理。</p>
+<h3 id="一、先说用法，以主界面邮件为例"><a href="#一、先说用法，以主界面邮件为例" class="headerlink" title="一、先说用法，以主界面邮件为例"></a>一、先说用法，以主界面邮件为例</h3><p>a.绑定</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">layout:OnAppear</span><span class="params">()</span></span></span><br><span class="line"></span><br><span class="line">      ......</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self._redPointIns ~= <span class="literal">nil</span> <span class="keyword">then</span></span><br><span class="line">        game.modules.RedPointModule:Rebind(self._redPointIns)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        self._redPointIns = game.modules.RedPointModule:Bind(&#123; event  = &#123;game.redPointEvent.MAIL_RED, </span><br><span class="line">				game.redPointEvent.TASK_MAIN_RED&#125;,widget = &#123;self.BtnMail.transform.gameObject, </span><br><span class="line">				self.BtnMission.transform.gameObject&#125;,target = self &#125;)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>b.移除</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">layout:OnDisappear</span><span class="params">()</span></span></span><br><span class="line">    ......</span><br><span class="line">    <span class="keyword">if</span> self._redPointIns ~= <span class="literal">nil</span> <span class="keyword">then</span></span><br><span class="line">        game.modules.RedPointModule:Unbind(self)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>由于主界面红点需求较多，故上述例子是以一个table一次绑定的，简化代码。</p>
+<p>在绑定的时候，需要判断是否绑定过，如果绑定过，只需要调用Rebind，这个API是支持动态替换参数的，具体可以看cell部分代码，如果参数没变，则什么都不传，</p>
+<p>内部会再次注册该红点关心的事件。</p>
+<p>界面DisApper的时候，记得调用Unbind，这里会移除该红点监听的所有事件，并且移除redPointModule管理的红点实例。</p>
+<blockquote>
+<p>注：为什么要有refresh的设计，因为我们界面是有两个状态，apper与disapper，二者是相辅相成的，当界面apper后，在disapper，这个时候会调用unBind，会移除掉红点的所有监听，但是红点cell可能并未销毁，还在target的cell列表中，故重新apper的时候，只需要刷新红点信息，监听事件即可。各个模块的红点cell需要大家像普通cell一样，自己管理下，其实也不需要做什么，在destyoy的时候置nil</p>
+</blockquote>
+<p>cell中的绑定实例：</p>
+<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/image.png" alt="image.png"></p>
+<h3 id="二、讲下核心，红点对应的事件"><a href="#二、讲下核心，红点对应的事件" class="headerlink" title="二、讲下核心，红点对应的事件"></a>二、讲下核心，红点对应的事件</h3><p>还有一个地方需要处理，就是红点对应的事件。具体如下图：</p>
+<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/template.png" alt="template.png"></p>
+<p>这个事件需要在绑定的时候传入，这是重点，需要自己在redPointEvents声明。有两个参数比较重要，特说明一下。</p>
+<p>1.CombineEvents：这个参数是红点树的核心，它主要是记录该红点的依赖节点，即子红点。填写的是redPointevents的枚举事件值，需要各个模块自己酌情判断，以免冗余。</p>
+<p>注：这里有个建议，就是当根红点只依赖一个子红点，且无其他任何逻辑，就可以简化掉，直接让根红点绑定子红点的事件，而不需要额外在注册这个根红点事件。</p>
+<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/root.png" alt="root.png"></p>
+<p>2.CheckProfilesKey：该参数即上述注解，需要注意的是，这个参数传入的是红点配置key，至于该红点关心哪些profile，甚至指定profile的指定key，需要在RedPointEvents.RedPointConfig里边声明。</p>
+<h3 id="三、最后说下绑定的参数"><a href="#三、最后说下绑定的参数" class="headerlink" title="三、最后说下绑定的参数"></a>三、最后说下绑定的参数</h3><p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/bind.png" alt="bind.png"></p>
+<p>这里没啥要多说的，就在呼应一下之前的主界面例子，支持一次绑定多个。注意，是以widget为判断基准的，其他参数可为数组，也可以是具体值，如果为数组，就要与widget一一对应。target肯定不是数组。</p>
+<h3 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h3><p>1、CheckShow的参数问题：这个参数在绑定的时候，有个param，传入什么，会原封不动传入CheckShow中，同时在红点内部产生refresh的时候，也会将该参数原封不动传入CheckShow，故该红点绑定的时候传入的是哪个参数，CheckShow的时候就能收到这个参数，不会发生错乱问题，和被谁依赖无关。</p>
+<p>2、根红点依赖子红点，但子红点需要参数的问题：这个时候，就需要自己在子红点的CheckShow中处理无参情况。比如角色入口红点依赖内部各个角色的红点，这个时候，内部每个角色的红点绑定同一个redPointEvent，CheckShow中根据参数处理显示逻辑，那么跟红点依赖这个红点，自然无参可传，这个时候，就需要这个redPointEvent的CheckShow处理无参情况，也就是判断所有角色。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2021/08/05/Animator%E9%81%87%E5%88%B0%E7%9A%84%E4%BA%8C%E4%B8%89%E4%BA%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -888,80 +991,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/07/05/ugui_optimize_2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yesterday Once More">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/05/ugui_optimize_2/" class="post-title-link" itemprop="url">UGUI优化(二)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-07-05 15:44:39 / Modified: 16:07:38" itemprop="dateCreated datePublished" datetime="2020-07-05T15:44:39+08:00">2020-07-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UGUI/" itemprop="url" rel="index"><span itemprop="name">UGUI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="UGUI概要"><a href="#UGUI概要" class="headerlink" title="UGUI概要"></a>UGUI概要</h2><p>　　理解UGUI系统不同部分的组成非常重要。整个系统是由一些基础类和组件共同构成。本章首先定义了一些贯穿整个系列文章的专业术语，接着讨论了UGUI关键系统的底层行为。</p>
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>　　Canvas，是Unity渲染系统给层状几何体提供的可以被画入、被放在上面或者放在世界空间的底层Unity组件。<br>　　Canvas负责将它包含的几何体组合成batch，生成合适的渲染命令发送给Unity图形系统。这个过程在底层的C++代码中完成，这个过程被称为一次rebatch或者一次batch build。当一个Canvas被标记为包含需要rebatch的几何体时，这个Canvas被认为是dirty的。<br>　　几何体由Canvas Renderer组件提供给Canvas。<br>　　一个子Canvas仅仅是一个嵌套在父Canvas中的组件，子Canvas将它的子物体和它的父Canvas隔离，一个子Canvas下dirty的子物体不会触发父Canvas的rebuild，反之亦然。（这些在某些特殊情况下是不确定的，比如说改变父Canvas的大小导致子Canvas的大小改变。）<br>　　Graphic是UGUI的C#库提供的一个基类。它是UGUI所有类的基类，给所有的UGUI类提供可以画在Canvas系统上的几何图形。大多数Unity内置的继承Graphic的类都是通过继承一个叫MaskableGraphic的子类来实现，这使得他们可以通过IMaskable接口来被隐藏。Drawable类的子类主要是image和text，已经提供了同名的组件。<br>　　Layout组件控制着RectTransform的大小和位置，经常被用于要生成具有相似的大小和位置关系内容的复杂布局。它只依靠RectTransform，只影响与其相关的RectTransform的属性。这些layout组件不依赖于Graphic类，可以独立于UGUI的Graphic组件之外使用。<br>　　Graphic和Layout组件都依赖于CanvasUpdateRegistry类，它不会在Unity编辑器的界面中显示。这个类追踪那些Graphic和Layout组件必须被更新的时候，还有与其对应的Canvas触发了willRenderCanvases事件的时候。<br>　　更新Graphic类和Layout类叫做rebuild。rebuild的过程将在本文后续详细讨论。</p>
-<h2 id="渲染细节"><a href="#渲染细节" class="headerlink" title="渲染细节"></a>渲染细节</h2><p>　　在使用UGUI制作UI时，请牢记Canvas中所有几何体的绘制都在一个透明队列中，这就意味着由UGUI制作的几何体将从始至终伴随着alpha混合，所以从多边形栅格化的每个像素都将被采样，即使它被完全不透明的物体所覆盖。在手机设备上，这种高等级的过度绘制将迅速超过GPU填充频率的承受能力。在移动设备上，这种高级别的过度绘制将迅速超过GPU填充频率的承受能力。</p>
-<h2 id="Batch构建过程（Canvas）"><a href="#Batch构建过程（Canvas）" class="headerlink" title="Batch构建过程（Canvas）"></a>Batch构建过程（Canvas）</h2><p>　　Batch构建过程是指Canvas通过结合网格绘制它所承载的UI元素，生成适当的渲染命令发送给Unity图形流水线。Batch的结果被缓存复用，直到这个Canvas被标为dirty，当Canvas中某一个构成的网格改变的时候就会标记为dirty。<br>　　Canvas的网格从那些Canvas下的CnavasRenderer组件中获取，但不包含任何子Canvas。<br>　　计算Batch要求按照深度排序网格，测试它们是否有重叠，共享材质等等。这个过程是多线程的，在不同的CPU架构下性能表现非常不同，特别是在手机芯片（通常CPU核心很少）和现代桌面CPU（通常拥有四核心或者更多）之间非常不同。</p>
-<h2 id="Rebuild过程（Graphics）"><a href="#Rebuild过程（Graphics）" class="headerlink" title="Rebuild过程（Graphics）"></a>Rebuild过程（Graphics）</h2><p>　　Rebuild过程是指Layout和UGUI的C#的Graphic组件的网格被重新计算，这是在CanvasUpdateRegistry类中执行的。请记住，这是一个C＃类，它的源码可以在Unity的Bitbucket上找到。<br>　　在CanvasUpdateRegistry类中，最有意思的就是PerformUpdate方法，当一个Canvas组件触发它的WillRenderCanvases事件时，这个方法就会被执行。这个事件每帧调用一次。<br>PerformUpdate函数运行的三个步骤：<br>1.通过ICanvasElement.Rebuild函数，请求rebuild被Dirty的Layout组件。<br>2.所有被注册的裁剪组件（例如Mask），对需要被裁剪的组件进行剔除。这在ClippingRegistry.Cull中执行。<br>3.dirty的Graphic组件被要求rebuild其图形元素。<br>对于Layout和Graphic的rebuild，过程被分为多个部分。Layout的rebuild有三个部分（PreLayout, Layout and PostLayout），而Graphic的rebuild有两个部分（PreRender和LatePreRender）。</p>
-<h2 id="Layout的rebuild"><a href="#Layout的rebuild" class="headerlink" title="Layout的rebuild"></a>Layout的rebuild</h2><p>　　要重新计算一个或者多个Layout组件所包含的UI组件的适当位置（以及可能的大小），有必要对Layout应用层次的排序。在GameObject的hierarchy中靠近root的Layout可能会影响改变嵌套在它里面的其他Layout的位置和大小，所以必须首先计算。        　　为此，UGUI根据层次结构中的深度对dirty的Layout组件列表进行排序。层次结构中较高的Layout（即拥有较少的父transform）将被移到列表的前面。<br>然后，排序好的Layout组件的列表将被rebuild，在这个步骤Layout组件控制的UI元素的位置和大小将被实际改变。关于独立的UI元素如何受Layout组件影响的详细细节，请参阅Unity Manual的UI Auto Layout章节。</p>
-<h2 id="Graphic的rebuild"><a href="#Graphic的rebuild" class="headerlink" title="Graphic的rebuild"></a>Graphic的rebuild</h2><p>　　当Graphic组件被rebuild的时候，UGUI将控制传递给ICanvasElement接口的Rebuild方法。Graphic执行了这一步，并在rebuild过程中的PreRender阶段运行了两个不同的rebuild步骤：<br>1.如果顶点数据已经被标为Dirty（例如组件的RectTransform已经改变大小），则重建网格。<br>2.如果材质数据已经被标为Dirty（例如组件的material或者texture已经被改变），则关联的Canvas Renderer的材质将被更新。<br>Graphic的Rebuild不会按照Graphic组件的特殊顺序进行，也不会进行任何的排序操作。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1031,7 +1060,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
