@@ -196,7 +196,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-28 02:18:10" itemprop="dateModified" datetime="2021-09-28T02:18:10+08:00">2021-09-28</time>
+                <time title="Modified: 2021-09-28 02:43:43" itemprop="dateModified" datetime="2021-09-28T02:43:43+08:00">2021-09-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,15 +237,15 @@
 <p>注：为什么要有refresh的设计，因为我们界面是有两个状态，apper与disapper，二者是相辅相成的，当界面apper后，在disapper，这个时候会调用unBind，会移除掉红点的所有监听，但是红点cell可能并未销毁，还在target的cell列表中，故重新apper的时候，只需要刷新红点信息，监听事件即可。各个模块的红点cell需要大家像普通cell一样，自己管理下，其实也不需要做什么，在destyoy的时候置nil</p>
 </blockquote>
 <p>cell中的绑定实例：</p>
-<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/image.png" alt="image.png"></p>
+<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/bind.png" alt=""></p>
 <h3 id="二、讲下核心，红点对应的事件"><a href="#二、讲下核心，红点对应的事件" class="headerlink" title="二、讲下核心，红点对应的事件"></a>二、讲下核心，红点对应的事件</h3><p>还有一个地方需要处理，就是红点对应的事件。具体如下图：</p>
-<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/template.png" alt="template.png"></p>
+<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/template.png" alt=""></p>
 <p>这个事件需要在绑定的时候传入，这是重点，需要自己在redPointEvents声明。有两个参数比较重要，特说明一下。</p>
 <p>1.CombineEvents：这个参数是红点树的核心，它主要是记录该红点的依赖节点，即子红点。填写的是redPointevents的枚举事件值，需要各个模块自己酌情判断，以免冗余。</p>
 <p>注：这里有个建议，就是当根红点只依赖一个子红点，且无其他任何逻辑，就可以简化掉，直接让根红点绑定子红点的事件，而不需要额外在注册这个根红点事件。</p>
-<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/root.png" alt="root.png"></p>
+<p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/root.png" alt=""></p>
 <p>2.CheckProfilesKey：该参数即上述注解，需要注意的是，这个参数传入的是红点配置key，至于该红点关心哪些profile，甚至指定profile的指定key，需要在RedPointEvents.RedPointConfig里边声明。</p>
-<h3 id="三、最后说下绑定的参数"><a href="#三、最后说下绑定的参数" class="headerlink" title="三、最后说下绑定的参数"></a>三、最后说下绑定的参数</h3><p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/bind.png" alt="bind.png"></p>
+<h3 id="三、最后说下绑定的参数"><a href="#三、最后说下绑定的参数" class="headerlink" title="三、最后说下绑定的参数"></a>三、最后说下绑定的参数</h3><p><img src="%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/bind.png" alt=""></p>
 <p>这里没啥要多说的，就在呼应一下之前的主界面例子，支持一次绑定多个。注意，是以widget为判断基准的，其他参数可为数组，也可以是具体值，如果为数组，就要与widget一一对应。target肯定不是数组。</p>
 <h3 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h3><p>1、CheckShow的参数问题：这个参数在绑定的时候，有个param，传入什么，会原封不动传入CheckShow中，同时在红点内部产生refresh的时候，也会将该参数原封不动传入CheckShow，故该红点绑定的时候传入的是哪个参数，CheckShow的时候就能收到这个参数，不会发生错乱问题，和被谁依赖无关。</p>
 <p>2、根红点依赖子红点，但子红点需要参数的问题：这个时候，就需要自己在子红点的CheckShow中处理无参情况。比如角色入口红点依赖内部各个角色的红点，这个时候，内部每个角色的红点绑定同一个redPointEvent，CheckShow中根据参数处理显示逻辑，那么跟红点依赖这个红点，自然无参可传，这个时候，就需要这个redPointEvent的CheckShow处理无参情况，也就是判断所有角色。</p>
