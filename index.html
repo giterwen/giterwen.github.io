@@ -165,6 +165,84 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2022/01/30/TikTok%20IOS%E5%AE%89%E8%A3%85%E8%A7%82%E7%9C%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yesterday Once More">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/30/TikTok%20IOS%E5%AE%89%E8%A3%85%E8%A7%82%E7%9C%8B/" class="post-title-link" itemprop="url">TikTok IOS安装观看</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-01-30 14:52:33 / Modified: 16:10:59" itemprop="dateCreated datePublished" datetime="2022-01-30T14:52:33+08:00">2022-01-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>title: TikTok ios观看<br>date: 2021-1-30 16:01:00<br>categories: TikTok</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>因为自己本身有每天中午观看tiktok半小时需求，晚上偶尔也看半小时左右。前段时间换了新手机，忘记了整个流程，所以也是查阅搜索了相关博客、油管视频，现总结如下。声明：本人纯属个人使用探索，为记录自己需要内容或学习感悟，不涉及商业用途，如有侵权，请告知并会删除。</p>
+<h3 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h3><p>一部iPhone，一个美区appleid，iTunes(老版本)，QuantumultX(或是ShadowRocket等)，爱思助手(或是iMazing用于安装ipa)，Fiddler(软件抓包)，版本号对应版本id查找工具。</p>
+<h3 id="下载对应版本TikTok"><a href="#下载对应版本TikTok" class="headerlink" title="下载对应版本TikTok"></a>下载对应版本TikTok</h3><p>1.先安装老版本iTunes，在iTunes–智能刷机–其他工具，选择最后一个支持应用商店的iTunes下载并安装。登录自己的美区账号，找到tiktok</p>
+<p>![](TikTok IOS安装观看/tiktok_applestore.jpg)</p>
+<p>2.打开旧版应用下载工具，先找到对应的 软件即tiktok,然后右键查看历史版本，找到我们所需的17.8.1版本，得知版本id为838412699</p>
+<p>![](TikTok IOS安装观看/tiktok_search.jpg)</p>
+<p>![](TikTok IOS安装观看/tiktok_1781.jpg)</p>
+<p>3.安装并打开Fiddler，复制代码bpu MZBuy.woa 将其填入左下黑色输入框内并按enter。然后在iTunes里点击下载tiktok，这时fiddler软件就会有响应反应，找到含字母T的红色图标点击选中，选择Inspectors-TextView，此时就会看到当前版本tiktok对应的版本id。我们要做的就是把第二步查找的对应版本id在此时复制替换掉，然后点击Run to Completion按钮。这个时候就等待iTunes慢慢下载完成。</p>
+<p>![](TikTok IOS安装观看/fiddler.jpg)</p>
+<p>![](TikTok IOS安装观看/fiddler_progress.jpg)</p>
+<p>4.安装对应TikTok。在上述第三步下载完之后，在iTunes资料库里有下载完的ipa文件，可以右键选择的Windows资源管理器中显示。打开爱思助手，选择我的设备–应用游戏–导入安装，然后找到刚才下载完的ipa，此时便已安装好对应版本TikTok</p>
+<p>5.避免地区限制。在QuantumultX软件里编辑配置，找打rewrite_local一栏，将如下代码复制粘贴</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(?&lt;&#x3D;_region&#x3D;)CN(?&#x3D;&amp;) url 307 JP</span><br><span class="line">(?&lt;&#x3D;&amp;mcc_mnc&#x3D;)4 url 307 2</span><br><span class="line">^(https?:\&#x2F;\&#x2F;(tnc|dm)[\w-]+\.\w+\.com\&#x2F;.+)(\?)(.+) url 302  $1$3</span><br><span class="line">(?&lt;&#x3D;\d\&#x2F;\?\w&#123;7&#125;_\w&#123;4&#125;&#x3D;)1[6-9]..(?&#x3D;.?.?&amp;) url 307 17</span><br></pre></td></tr></table></figure>
+
+<p>然后在mitm一栏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname &#x3D; *.tiktokv.com, *byteoversea.com, *tik-tokapi.com</span><br></pre></td></tr></table></figure>
+
+<p>当然首先mitm证书得配置好</p>
+<p>至此，整个titok对应版本软件安装完并且解除限制，如果有问题再仔细看看是哪步出了问题。也可以对比网上其他教程查看。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2021/08/28/%E7%BA%A2%E7%82%B9%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -909,88 +987,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://github.com/giterwen/giterwen.github.io.git/2020/07/05/ugui_optimize_3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yesterday Once More">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/05/ugui_optimize_3/" class="post-title-link" itemprop="url">UGUI优化(三)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-07-05 15:45:10 / Modified: 16:22:26" itemprop="dateCreated datePublished" datetime="2020-07-05T15:45:10+08:00">2020-07-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/UGUI/" itemprop="url" rel="index"><span itemprop="name">UGUI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="UGUI性能分析工具"><a href="#UGUI性能分析工具" class="headerlink" title="UGUI性能分析工具"></a>UGUI性能分析工具</h2><p>有很多用于分析UGUI性能的工具。一些关键的工具是：</p>
-<blockquote>
-<p>1.Unity Profiler<br>2.Unity Frame Debugger<br>3.XCode的Instrument或者Intel的VTune<br>4.XCode的Frame Debugger或者Intel GPA<br>外部工具提供了对CPU毫秒级（或更高精度的）性能分析方法，同时对shader和drawcall详细分析。对上述工具设置和使用的说明超出了本指南的范围。请注意，XCode Frame Debugger和Instrument仅适用于Apple平台的IL2CPP版本，因此目前只能用于iOS平台的性能分析。</p>
-</blockquote>
-<h3 id="Unity-Profiler"><a href="#Unity-Profiler" class="headerlink" title="Unity Profiler"></a>Unity Profiler</h3><p>　　Unity Profiler的主要用途是执行性能比较分析：当Unity Profiler运行的时候进行enabling和disabling的操作，它可以迅速的缩小定位到性能问题最大的UI层级。<br>　　要分析这个，请查看profiler输出结果中的“Canvas.BuildBatch”和“Canvas.SendWillRenderCanvases”。<br>　　如上文所述，Canvas.BuildBatch是执行Canvas的Batch build过程的底层代码计算量。<br>　　Canvas.SendWillRenderCanvases包含了C#脚本对Canvas组件的willRenderCanvases事件的订阅的调用。UGUI的CanvasUpdateRegistry类接收这个事件并且通过它来执行前文所描述的rebuild过程。预计所有被标dirty的UI组件都会在这个时候更新他们的Canvas Renderer。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注意：为了更容易地看到UI性能的差异，通常建议禁用除了Rendering和Scripts以外所有trace category。这可以通过</span><br><span class="line">点击CPU Usage profiler左侧的名叫trace category旁边的彩色方块来完成。</span><br></pre></td></tr></table></figure>
-<p>还要注意，category可以在CPU profiler中重新排列，可以点击或者拖拽category向上或者向下来对他们进行重新排列。</p>
-<h3 id="Unity-Frame-Debugger"><a href="#Unity-Frame-Debugger" class="headerlink" title="Unity Frame Debugger"></a>Unity Frame Debugger</h3><p>　　Unity Frame Debugger是一个减少UGUI的draw call的实用工具。这个内置的工具可以通过Unity Editor中的Window菜单来访问。当它运行的时候，它将显示包括UGUI在内的所有Unity产生的draw call。<br>特别要注意的是，Unity Frame Debugger在Unity Editor界面就可以更新游戏视口产生的draw call信息，因此可以用来尝试不同的UI配置而无需进入游戏模式。<br>UGUI的drawcall产生的位置取决于Canvas组件上被设置的渲染模式：</p>
-<blockquote>
-<p>1.Screen Space – Overlay将出现在Canvas.RenderOverlays组中。<br>2.Screen Space – Camera将出现在Render.TransparentGeometry子项，所选渲染相机的Camera.Render组中。<br>3.World Space将出现在Render.TransparentGeometry子项，每个可以看见Canvas的World Space的摄像机中。</p>
-</blockquote>
-<p>如果UI的shader没有被自定义的shader替换的话，那么所有UI都可以被 “Shader: UI/Default”识别，列出在哪个组和drawcall的细节。在下图中请看高亮红框标注的地方。（图片见原网页）<br>在调整UI的时候观察Unity Frame Debugger所显示的信息，这就相对比较简单的使Canvas中的UI元素最优的合成batch。最常见的与设计相关的打断批次的原因是UI元素间不小心造成的重叠。<br>所有的UGUI组件将它们的几何体生成成一系列的 quad。然而，很多sprite和text只占用用于显示它们的 quad的一小部分，留下了大量的剩余空间。这样的结果就是，UI开发者无意中使多个不同的 quad互相覆盖，它们的texture来自不同的material，不能合成batch。<br>由于UGUI的操作完全在透明队列中，任何有不能合batch的quad在它上边的quad必须在不能合batch的quad之前绘制，因此它不能与放在不能合batch的quad上的quad合batch。（翻译这段我尽力了，但是估计还是不清楚。我讲一下大意：就是两个能合batch的quad中间夹了一个不能合batch的quad，造成这两个quad也不能合batch了）<br>　　考虑一个情景，有三个quadA、B、C。假设这三个quad彼此覆盖，并且A和C使用了相同的Material，B使用了单独的Material。B不能和A、C合成batch。<br>如果在层级结构中从上到下的是A、B、C，那么A、C也不能合batch，因为B必须绘制在A的上面，C的下面。然而，如果B被放在可被合batch的quad前面或者后面，那么可以被合batch的quad就能构成batch。B只需要在batch的quad之前或者之后绘制，而不会介入其中。<br>关于这个问题更深入的探讨，请看Canvas章节的Child order部分。</p>
-<h3 id="Instruments-amp-VTune"><a href="#Instruments-amp-VTune" class="headerlink" title="Instruments &amp; VTune"></a>Instruments &amp; VTune</h3><p>　　XCode的Instruments和Intel的VTune各自可以非常深入的分析UGUI的rebuild和Canvas的batch计算在Apple设备和Intel CPU上的性能。方法名称几乎和我们之前介绍过的Unity Profiler的标签完全相同。它们是：<br>Canvas::SendWillRenderCanvases是一个C++父类调用C#中的Canvas.SendWillRenderCanvases方法，并控制 Unity Profiler中该行显示。它包含了用于进行rebuild过程的代码，这已经在上一章节详细介绍了。<br>Canvas::UpdateBatches几乎和Canvas.BuildBatch完全相同，但是增加了Unity Profiler页面并不包括的代码引用。它运行上文描述的Canvas的batch建立的实际过程。<br>　　当通过IL2CPP构建一个Unity APP时，这些工具可以被用于更深入的查看C#中Canvas::SendWillRenderCanvases的编译。（注意：编译的方法的名字是近似的。）<br>IndexedSet_Sort和CanvasUpdateRegistry_SortLayoutList是用于排序显示在标为dirty的Layout组件被重新计算之前的一个列表。如上文所述，这包括了计算每个Layout组件的父transform数量。<br>ClipperRegistry.Cull调用所有IClipRegion接口注册的实现者。内置的实现者包括使用IClipRegion接口的RectMask2D组件。当ClipperRegistry.Cull被调用时，RectMask2D组件将遍历在它层级下的所有要被裁剪的UI元素，更新他们的剔除信息。<br>所有可嵌套元素，并要求它们更新其剔除信息。<br>Graphic_Rebuild包含所有要显示的Image，Text或其他Graphic派生的组件所需要的网格的实际计算性能开销。在这之下有其他一些方法，如Graphic_UpdateGeometry，最值得注意的是Text_OnPopulateMesh。<br>-当Best Fit勾选时，Text_OnPopulateMesh通常是一个热点。这将在本指南后面详细讨论。<br>-网格修饰符，比如Shadow_ModifyMesh和Outline_ModifyMesh也在这里运行。通过这些方法可以看到shadow,       outline和其他特殊效果组件的计算性能开销。</p>
-<h3 id="Xcode-Frame-Debugger和Intel-GPA"><a href="#Xcode-Frame-Debugger和Intel-GPA" class="headerlink" title="Xcode Frame Debugger和Intel GPA"></a>Xcode Frame Debugger和Intel GPA</h3><p>　　底层的Frame Debugger对监测UI不同独立部分的batch性能开销和UI过度绘制开销非常重要。在后面章节我们将详细的对UI过度绘制进行讨论。<br>　　Xcode Frame Debugger的使用<br>　　为了测试一个给定的UI是否过度榨取GPU资源，可以使用Xcode内置的GPU诊断工具。首先将项目配置为使用Metal或OpenGLES3，然后进行构建并打开生成的Xcode项目工程。如果Unity在OpenGLES 2下运行，则Xcode不能对Unity进行分析，因此这些技术不能用于较旧的设备。<br>注意：在某些版本的Xcode中，为了使图形分析器工作，有必要在Build Scheme中选择适当的Graphics API。为此，请转到Xcode中的Product菜单，展开Scheme菜单项，然后选择Edit Scheme ….选择Run target并转到Options页面。更改GPU Frame Capture选项来使API适配您的工程。假设Unity工程设置了自动选择图形API，则大多数新一代的iPad将默认选择Metal。如果有疑问，请启动项目并查看Xcode中的调试日志，前面的几行应该会指出哪个渲染路径（Metal，GLES3或GLES2）正在被初始化。<br>注意：上述调整在Xcode 7.4中应该不是必需的，但在Xcode 7.3.1和更旧的版本中仍然偶尔会被发现是必须的。<br>在iOS设备上构建并运行项目。GPU profiler显示在Xcode的Navigator边栏中，点击FPS条目。（图请参见原网页）<br>GPU分析器中第一个重要的是屏幕中的三个条目：“Tiler”、“Renderer”、“Device”。这些表示：<br>“Tiler”是对GPU生成几何体（包括在顶点着色器中的花费时间）过程中压力的衡量。<br>——一般来讲，“Tiler”值高表明顶点着色器计算过慢或者是绘制的顶点过多。<br>“Renderer”是对GPU的像素流水线压力的衡量。<br>——一般来讲，“Renderer”值高表明应用程序超过了GPU的最大填充率，或是片段着色器效率低下。<br>“Device” 是GPU使用的综合衡量标准，包括“Tiler”和“Renderer”的性能分析。它通常可以被忽略，因为它大体上跟踪监测“Tiler”和“Renderer”的较高者。<br>有关Xcode GPU  Profiler的更多信息，请参阅此文档(链接见原网页)。<br>Xcode’s Frame Debugger可以通过点击隐藏在GPU Profiler底部的小“相机”图标来打开。在下面的屏幕截图中，通过箭头和红色框突出显示。（截图见原网页）<br>暂停一下之后，Frame Debugger的摘要视图就会出现，如下所示（截图见原网页）：<br>在使用默认UI着色器时，假设默认UI着色器没有被自定义着色器替换，那么由UGUI系统生成的渲染几何图形的开销将显示在“UI / Default”着色器通道下。在上面的截图中可以看到这个渲染管线的默认的UI着色器是“UI / Default”。<br>UGUI只产生quad，所以顶点着色器不太可能给GPU Tiler流水线产生压力。出现在这个着色器中的任何问题都应归结于填充率问题。</p>
-<h3 id="分析分析器结果"><a href="#分析分析器结果" class="headerlink" title="分析分析器结果"></a>分析分析器结果</h3><p>在收集分析数据之后，可以得出几个结论：<br>　　如果Canvas.BuildBatch或Canvas :: UpdateBatches占用了过多的CPU时间，则可能的问题是单个Canvas上的Canvas Renderer组件数量过多。请参阅“Canvas”一章的“Splitting Canvases”章节。<br>如果GPU过度的时间花费在绘制UI上，并且frame debugger表明片段着色器流水线是瓶颈，那么应该是UI的像素填充率超过了GPU的能力，最可能的原因是UI的过渡绘制。请参考Fill-rate, Canvases and input章节的Remediating fill-rate issues部分。<br>如果Graphic的rebuild占用了过多的CPU，如在Canvas.SendWillRenderCanvases或者Canvas::SendWillRenderCanvases中看到了大量的CPU时间占用，那么就需要进行深层分析，应该与Graphic的rebuil过程中的一些部分有关。<br>如果是大量的WillRenderCanvas花费在IndexedSet_Sort或是CanvasUpdateRegistry_SortLayoutList上，时间花费在对dirty的layout组件列表进行排序，那么就要考虑减少Canvas中的Layout组件数量。请在Replacing layouts with RectTransforms和Splitting Canvases部分中也许会找到补救措施。<br>如果过多的时间花在Text_OnPopulateMesh上，那么Text网格的生成就是罪魁祸首。请参阅Best Fit和 Disabling Canvas Renderers部分，也许会找到补救措施。并考虑Splitting Canvases中的建议，如果正在重建的大部分文本实际上并未更改其基础字符串数据，text大量rebuild实际上并没有改变其基础的字符串数据。<br>如果时间花在内置的Shadow_ModifyMesh或Outline_ModifyMesh（或任何其他使用的ModifyMesh），则问题在于花费在计算修饰性网格过多的时间。考虑删除这些组件，并通过静态图像实现其视觉效果。<br>如果Canvas.SendWillRenderCanvas中没有特定的热点，或者它看起来每帧都在运行，那么问题可能是动态元素与静态元素混合在一起，致使整个Canvas过于频繁地重建。参见Splitting Canvases部分。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1060,7 +1056,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1107,7 +1103,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
